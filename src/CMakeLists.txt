@@ -59,7 +59,7 @@ set(fppFiles
     stdlib_string_type_constructor.fypp
     stdlib_strings_to_string.fypp
     stdlib_strings.fypp
-    stdlib_version.fypp
+    # stdlib_version.fypp
 )
 
 
