@@ -1,5 +1,6 @@
 #:include "common.fypp"
 #:set RCI_KINDS_TYPES = REAL_KINDS_TYPES + CMPLX_KINDS_TYPES + INT_KINDS_TYPES
+#:set RI_KINDS_TYPES = REAL_KINDS_TYPES + INT_KINDS_TYPES
 module stdlib_linalg
   !!Provides a support for various linear algebra procedures
   !! ([Specification](../page/specs/stdlib_linalg.html))
@@ -53,14 +54,14 @@ module stdlib_linalg
     #:for k1, t1 in RCI_KINDS_TYPES
       module function diag_${t1[0]}$${k1}$_mat(A) result(res)
         ${t1}$, intent(in) :: A(:,:)
-        ${t1}$ :: res(minval(shape(A)))
+        ${t1}$ :: res
       end function diag_${t1[0]}$${k1}$_mat
     #:endfor
     #:for k1, t1 in RCI_KINDS_TYPES
       module function diag_${t1[0]}$${k1}$_mat_k(A,k) result(res)
         ${t1}$, intent(in) :: A(:,:)
         integer, intent(in) :: k
-        ${t1}$ :: res(minval(shape(A))-abs(k))
+        ${t1}$ :: res
       end function diag_${t1[0]}$${k1}$_mat_k
     #:endfor
   end interface
@@ -144,7 +145,7 @@ module stdlib_linalg
     !! Checks if a matrix (rank-2 array) is diagonal
     !! ([Specification](../page/specs/stdlib_linalg.html#
     !! is_diagonal-checks-if-a-matrix-is-diagonal))
-    #:for k1, t1 in RCI_KINDS_TYPES
+    #:for k1, t1 in RI_KINDS_TYPES
       module procedure is_diagonal_${t1[0]}$${k1}$
     #:endfor
   end interface is_diagonal
@@ -196,7 +197,7 @@ module stdlib_linalg
     !! Checks if a matrix (rank-2 array) is triangular
     !! ([Specification](../page/specs/stdlib_linalg.html#
     !! is_triangular-checks-if-a-matrix-is-triangular))
-    #:for k1, t1 in RCI_KINDS_TYPES
+    #:for k1, t1 in RI_KINDS_TYPES
       module procedure is_triangular_${t1[0]}$${k1}$
     #:endfor
   end interface is_triangular
@@ -209,7 +210,7 @@ module stdlib_linalg
     !! Checks if a matrix (rank-2 array) is Hessenberg
     !! ([Specification](../page/specs/stdlib_linalg.html#
     !! is_hessenberg-checks-if-a-matrix-is-hessenberg))
-    #:for k1, t1 in RCI_KINDS_TYPES
+    #:for k1, t1 in RI_KINDS_TYPES
       module procedure is_Hessenberg_${t1[0]}$${k1}$
     #:endfor
   end interface is_hessenberg
@@ -233,9 +234,9 @@ contains
         dim2_ = optval(dim2, dim1)
         allocate(result(dim1, dim2_))
         
-        result = 0_int8
+        result = 0_8
         do i = 1, min(dim1, dim2_)
-            result(i, i) = 1_int8
+            result(i, i) = 1_8
         end do
 
     end function eye
@@ -262,7 +263,7 @@ contains
     #:endfor
 
 
-    #:for k1, t1 in RCI_KINDS_TYPES
+    #:for k1, t1 in RI_KINDS_TYPES
       pure function is_diagonal_${t1[0]}$${k1}$(A) result(res)
         ${t1}$, intent(in) :: A(:,:)
         logical :: res
@@ -366,7 +367,7 @@ contains
     #:endfor
 
 
-    #:for k1, t1 in RCI_KINDS_TYPES
+    #:for k1, t1 in RI_KINDS_TYPES
       function is_triangular_${t1[0]}$${k1}$(A,uplo) result(res)
         ${t1}$, intent(in) :: A(:,:)
         character, intent(in) :: uplo
@@ -404,7 +405,7 @@ contains
     #:endfor
 
 
-    #:for k1, t1 in RCI_KINDS_TYPES
+    #:for k1, t1 in RI_KINDS_TYPES
       function is_hessenberg_${t1[0]}$${k1}$(A,uplo) result(res)
         ${t1}$, intent(in) :: A(:,:)
         character, intent(in) :: uplo

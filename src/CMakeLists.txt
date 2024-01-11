@@ -19,13 +19,13 @@ set(fppFiles
     # stdlib_io_npy_load.fypp
     # stdlib_io_npy_save.fypp
     stdlib_kinds.fypp
-    # stdlib_linalg.fypp
+    stdlib_linalg.fypp
     # stdlib_linalg_diag.fypp
     # stdlib_linalg_outer_product.fypp
     # stdlib_linalg_kronecker.fypp
     # stdlib_linalg_cross_product.fypp
     stdlib_optval.fypp
-    # stdlib_selection.fypp
+    stdlib_selection.fypp
     # stdlib_sorting.fypp
     # stdlib_sorting_ord_sort.fypp
     # stdlib_sorting_sort.fypp
@@ -47,7 +47,7 @@ set(fppFiles
     # stdlib_quadrature.fypp
     # stdlib_quadrature_trapz.fypp
     # stdlib_quadrature_simps.fypp
-    # stdlib_random.fypp
+    stdlib_random.fypp
     # stdlib_math.fypp
     # stdlib_math_linspace.fypp
     # stdlib_math_logspace.fypp
