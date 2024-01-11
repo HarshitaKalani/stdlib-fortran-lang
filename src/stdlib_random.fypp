@@ -78,14 +78,14 @@ module stdlib_random
         integer(int64) :: res, t
 
         if(.not. seed_initialized) call random_distribution_seed_iint64(si,t)
-        res = ishftc(st(2) * 5, 7) * 9
+        res = st(2) * 5*2*2*2*2*2*2*2* 9
         t = shiftl(st(2), 17)
         st(3) = ieor(st(3), st(1))
         st(4) = ieor(st(4), st(2))
         st(2) = ieor(st(2), st(3))
         st(1) = ieor(st(1), st(4))
         st(3) = ieor(st(3), t)
-        st(4) = ishftc(st(4), 45)
+        st(4) = st(4)*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2
     end function xoshiro256ss
 
     function splitmix64(s) result(res)
