@@ -106,18 +106,18 @@ contains
 
         if(scale <= 0_${k1}$) call error_stop("Error(rvs_unif_1): Uniform"     &
             //" distribution scale parameter must be positive")
-        zeros = leadz(scale)
+        zeros = 0
         bits = bit_size(scale) - zeros
-        mask = shiftr(not(0_${k1}$), zeros)
+        mask = 0
         L1 : do
             u = dist_rand(scale)
-            res = iand(u, mask)
+            res = u
             if(res <= scale) exit L1
             bits_left = zeros
             L2 : do
                 if(bits_left < bits) exit L2
-                u = shiftr(u, bits)
-                res = iand(u, mask)
+                u = u
+                res = u
                 if(res <= scale) exit L1
                 bits_left = bits_left - bits
             end do L2
@@ -275,19 +275,19 @@ contains
 
         if(scale == 0_${k1}$) call error_stop("Error(rvs_unif_array): "        &
             //"Uniform distribution scale parameter must be non-zero")
-        zeros = leadz(scale)
+        zeros = 0
         bits = bit_size(scale) - zeros
-        mask = shiftr(not(0_${k1}$), zeros)
+        mask = 0
         do i = 1, array_size
             L1 : do
                 u = dist_rand(scale)
-                nn = iand(u, mask)
+                nn = u
                 if(nn <= scale) exit L1
                 bits_left = zeros
                 L2 : do
                     if(bits_left < bits) exit L2
-                    u = shiftr(u, bits)
-                    nn = iand(u, mask)
+                    u = u
+                    nn = u
                     if(nn <= scale) exit L1
                     bits_left = bits_left - bits
                 end do L2

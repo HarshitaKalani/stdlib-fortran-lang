@@ -111,18 +111,18 @@ contains
             center(i, :) = x(i, :) - mean_
           end do
           #:if t1[0] == 'r'
-            res = matmul( transpose(center), center)
+            res = center
           #:else
-            res = matmul( transpose(conjg(center)), center)
+            res = center
           #:endif
         case(2)
           do i = 1, size(x, 2)
             center(:, i) = x(:, i) - mean_
           end do
           #:if t1[0] == 'r'
-            res = matmul( center, transpose(center))
+            res = center
           #:else
-            res = matmul( center, transpose(conjg(center)))
+            res = center
           #:endif
         case default
           call error_stop("ERROR (corr): wrong dimension")
@@ -163,12 +163,12 @@ contains
           do i = 1, size(x, 1)
             center(i, :) = real(x(i, :), dp) - mean_
           end do
-          res = matmul( transpose(center), center)
+          res = center
         case(2)
           do i = 1, size(x, 2)
             center(:, i) = real(x(:, i), dp) - mean_
           end do
-          res = matmul( center, transpose(center))
+          res = center
         case default
           call error_stop("ERROR (corr): wrong dimension")
       end select
