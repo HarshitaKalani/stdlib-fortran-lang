@@ -7,6 +7,7 @@ module stdlib_stats_moment
   use, intrinsic:: ieee_arithmetic, only: ieee_value, ieee_quiet_nan
   use stdlib_error, only: error_stop
   use stdlib_optval, only: optval
+  use stdlib_stats_mean, only: mean
   use stdlib_kinds, only: sp, dp, xdp, qp, &
       int8, int16, int32, int64
   implicit none
@@ -61,14 +62,7 @@ module stdlib_stats_moment
     #:for k1, t1 in RC_KINDS_TYPES
       #:for rank in RANKS
         #:set RName = rname("moment",rank, t1, k1)
-        module function ${RName}$(x, order, dim, center, mask) result(res)
-          ${t1}$, intent(in) :: x${ranksuffix(rank)}$
-          integer, intent(in) :: order
-          integer, intent(in) :: dim
-          ${t1}$, intent(in), optional :: center${reduced_shape('x', rank, 'dim')}$
-          logical, intent(in), optional :: mask
-          ${t1}$ :: res${reduced_shape('x', rank, 'dim')}$
-        end function ${RName}$
+        procedure :: ${RName}$
       #:endfor
     #:endfor
 
@@ -89,14 +83,7 @@ module stdlib_stats_moment
     #:for k1, t1 in INT_KINDS_TYPES
       #:for rank in RANKS
         #:set RName = rname("moment",rank, t1, k1, 'dp')
-        module function ${RName}$(x, order, dim, center, mask) result(res)
-          ${t1}$, intent(in) :: x${ranksuffix(rank)}$
-          integer, intent(in) :: order
-          integer, intent(in) :: dim
-          real(dp),intent(in), optional :: center${reduced_shape('x', rank, 'dim')}$
-          logical, intent(in), optional :: mask
-          real(dp) :: res${reduced_shape('x', rank, 'dim')}$
-        end function ${RName}$
+        procedure :: ${RName}$
       #:endfor
     #:endfor
 
